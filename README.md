@@ -12,8 +12,8 @@ This repository contains a Docker Compose setup for a **MongoDB distributed repl
 - [Setup](#setup)
 - [Usage](#usage)
 - [Cleanup LINUX ONLY](#cleanup---linux-only)
-- [Configuration](#configuration)
-- [Connection String](#connection-string)
+- [Configuration](#configuration-details)
+- [Connection String](#usage)
 - [Future Enhancements](#future-enhancements)
 
 ---

@@ -11,7 +11,7 @@ This repository contains a Docker Compose setup for a **MongoDB distributed repl
 - [Prerequisites](#prerequisites)
 - [Setup](#setup)
 - [Usage](#usage)
-- [Cleanup](#cleanup)
+- [Cleanup LINUX ONLY](#cleanup-LINUX-ONLY)
 - [Configuration](#configuration)
 - [Connection String](#connection-string)
 - [Future Enhancements](#future-enhancements)
@@ -68,18 +68,41 @@ This project deploys a highly available MongoDB replica set to provide redundanc
    MONGOEXPRESS_PASSWORD=adminpass
    ```
 
-3. Run the setup script to start containers and initialize the replica set:
+3. Run the setup script to start containers and initialize the replica set, or setup manually:
 
-  **Linux:**
+  **Linux setup:**
    ```bash
    chmod +x setup_mongo_cluster.sh
    ./setup_mongo_cluster.sh --verbose
    ```
 
-   **Windows:**
+   **Windows setup:**
 
    ```bash
    Windows-setup.bat
+   ```
+
+   **Manual setup:**
+   
+   1. Create volumes. (Defined in `mongo-cluster.env`)
+   2. Run compose file.
+   ```bash
+docker compose --env-file mongo-cluster.env up -d
+   ```
+   3. Initialize the Replica Set
+   ```bash
+docker exec mongo1 mongo --eval "
+rs.initiate({
+  _id: 'myReplicaSet',
+  members: [
+    { _id: 0, host: 'mongo1:27017' },
+    { _id: 1, host: 'mongo2:27017' },
+    { _id: 2, host: 'mongo3:27017' },
+    { _id: 3, host: 'mongo4:27017' },
+    { _id: 4, host: 'mongo5:27017' }
+  ]
+})
+"
    ```
 ---
 

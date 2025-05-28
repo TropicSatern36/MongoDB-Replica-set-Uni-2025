@@ -113,10 +113,10 @@ rs.initiate({
 
 * Local docker
   ```
-  mongodb://localhost:27017/?replicaSet=myReplicaSet
+  mongodb://localhost:27017/?directConnection=true&replicaSet=myReplicaSet
   ```
 
- * Within Docker stack
+* Within Docker stack
    ```
    mongodb://mongo1:27017,mongo2:27017,mongo3:27017,mongo4:27017,mongo5:27017/?replicaSet=myReplicaSet
    ```

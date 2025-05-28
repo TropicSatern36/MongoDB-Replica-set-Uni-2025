@@ -93,11 +93,11 @@ run_cmd docker exec mongo1 mongo --eval "
 rs.initiate({
   _id: 'myReplicaSet',
   members: [
-    { _id: 0, host: 'mongo1:27017' },
-    { _id: 1, host: 'mongo2:27017' },
-    { _id: 2, host: 'mongo3:27017' },
-    { _id: 3, host: 'mongo4:27017' },
-    { _id: 4, host: 'mongo5:27017' }
+    { _id: 0, host: '172.0.0.11:27017' },
+    { _id: 1, host: '172.0.0.12:27017' },
+    { _id: 2, host: '172.0.0.13:27017' },
+    { _id: 3, host: '172.0.0.14:27017' },
+    { _id: 4, host: '172.0.0.15:27017' }
   ]
 })
 "

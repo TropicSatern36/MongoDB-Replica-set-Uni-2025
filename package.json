@@ -16,5 +16,8 @@
     "express": "^5.1.0",
     "mongoose": "^8.15.1",
     "nodemon": "^3.1.10"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^9.8.0"
   }
 }

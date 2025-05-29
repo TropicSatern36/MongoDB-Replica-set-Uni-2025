@@ -12,8 +12,12 @@ const Payment = require('../models/payment');
 //Displaying all users
 async function getAllUsers() {
   try {
-    return await User.find();
+    console.log('Attempting to fetch all users...');
+    const users = await User.find();
+    console.log('Fetched users:', users);
+    return users;
   } catch (error) {
+    console.error('Error in getAllUsers:', error);
     throw error;
   }
 }
@@ -89,6 +93,17 @@ async function searchProductsByName(nameQuery) {
 //============================================
 
 //Orders
+//Gets all orders
+async function getAllOrders() {
+  try {
+    return await Order.find()
+      .populate('products.product')
+      .populate('user');
+  } catch (error) {
+    throw error;
+  }
+}
+
 //Gets all the orders from a specific user
 async function getOrdersByUserId(userId) {
   try {
@@ -115,6 +130,17 @@ async function getOrderById(orderId) {
 //============================================
 
 //Review
+//Gets all reviews
+async function getAllReviews() {
+  try {
+    return await Review.find()
+      .populate('user')
+      .populate('product'); // Assuming reviews are linked to products
+  } catch (error) {
+    throw error;
+  }
+}
+
 //Gets the reviews for certain products
 async function getReviewsByProductId(productId) {
   try {
@@ -140,6 +166,15 @@ async function getReviewById(reviewId) {
 //============================================
 
 //Wishlist
+//Gets all wishlists
+async function getAllWishlists() {
+  try {
+    return await Wishlist.find().populate('user').populate('products');
+  } catch (error) {
+    throw error;
+  }
+}
+
 //Gets a users wishlist
 async function getWishlistByUserId(userId) {
   try {
@@ -155,6 +190,15 @@ async function getWishlistByUserId(userId) {
 //============================================
 
 //Payments
+//Gets all payments
+async function getAllPayments() {
+  try {
+    return await Payment.find().populate('user').populate('order');
+  } catch (error) {
+    throw error;
+  }
+}
+
 //Gets the total of payments from a specific date
 async function getPaymentsTotalByDateRange(startDate, endDate) {
   try {
@@ -201,11 +245,15 @@ module.exports = {
   getAllProducts,
   getProductById,
   searchProductsByName,
+  getAllOrders,
   getOrdersByUserId,
   getOrderById,
+  getAllReviews,
   getReviewsByProductId,
   getReviewById,
+  getAllWishlists,
   getWishlistByUserId,
+  getAllPayments,
   getPaymentsTotalByDateRange,
   getPaymentById
 };

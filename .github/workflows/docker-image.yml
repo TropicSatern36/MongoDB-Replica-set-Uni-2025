@@ -34,15 +34,26 @@ jobs:
             latest  # Adding 'latest' tag explicitly
             ${{ github.sha }}
             ${{ github.ref_name }}
-            
-      - name: Build and push Docker image
-        id: push
+      - name: Build Docker image (no push)
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
         with:
           context: .
-          push: true
+          push: false
+          load: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Push Docker image
+        id: push
+        run: |
+          echo "${{ steps.meta.outputs.tags }}" | tr ',' '\n' | while read tag; do
+            docker push "$tag"
+          done
+
+      - name: Get image digest
+        id: digest
+        run: echo "digest=$(docker inspect --format='{{index .RepoDigests 0}}' ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest)" >> "$GITHUB_OUTPUT"
+
 
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v1

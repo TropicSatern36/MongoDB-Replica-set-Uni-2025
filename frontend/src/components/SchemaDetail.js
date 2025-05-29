@@ -152,7 +152,7 @@ function SchemaDetail() {
             formattedFormData['address.country'] = value.country || '';
         } else if (schemaName.toLowerCase() === 'product' && key === 'category' && typeof value === 'object' && value !== null) {
              // For product category, store the ObjectId if populated, otherwise handle as string
-             formattedFormData[key] = value._id || ''; // Assuming _id is present if populated
+             formattedFormData[key] = value._id || '';
         } else if (schemaName.toLowerCase() === 'order' && key === 'user' && typeof value === 'object' && value !== null) {
             // For order user, store the ObjectId if populated
             formattedFormData[key] = value._id || '';
@@ -167,7 +167,7 @@ function SchemaDetail() {
              formattedFormData[key] = value._id || '';
          } else if (schemaName.toLowerCase() === 'wishlist' && key === 'products' && Array.isArray(value)) {
              // For wishlist products, store the array of ObjectIds (if populated, value will be objects)
-             formattedFormData[key] = value.map(p => p._id || p); // Map to _id if populated, otherwise keep ID
+             formattedFormData[key] = value.map(p => p._id || p); 
          } else if (schemaName.toLowerCase() === 'payment' && (key === 'user' || key === 'order') && typeof value === 'object' && value !== null) {
              // For payment user and order, store the ObjectId if populated
              formattedFormData[key] = value._id || '';
@@ -228,7 +228,6 @@ function SchemaDetail() {
             dataToSend[key] = value;
          } else {
             try {
-                 // Attempt to parse if it looks like JSON, otherwise keep as string/primitive
                  // Handle case where value might be an ObjectId string (e.g., for user in Order, product/user in Review, user/order in Payment)
                 dataToSend[key] = value && typeof value === 'string' && value.match(/^[0-9a-fA-F]{24}$/) ? value : JSON.parse(value);
             } catch (e) {

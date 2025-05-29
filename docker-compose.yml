@@ -81,7 +81,7 @@ services:
     restart: unless-stopped
 
   front-end:
-    image: mongo-express
+    image: ghcr.io/tropicsatern36/mongodb-replica-set-uni-2025:latest
     container_name: front-end
     ports:
       - ${FRONTEND_PORT}:${FRONTEND_PORT}
@@ -92,7 +92,7 @@ services:
       - mongo1
     networks:
       mongoNet:
-        ipv4_address: 172.0.0.21
+        ipv4_address: 172.0.0.22
     restart: unless-stopped
 
 volumes:

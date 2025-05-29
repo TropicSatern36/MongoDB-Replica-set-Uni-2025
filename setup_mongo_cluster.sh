@@ -108,6 +108,6 @@ if [ "$CLEAN" = true ]; then
   echo -e "${GREEN}🛑 Cleaning up: stopping containers and removing volumes...${NC}"
   run_cmd docker compose down
   echo -e "${GREEN}🗑️ Removing MongoDB volume directories...${NC}"
-  run_cmd sudo rm -rfv "${MONGO_VOLUME_1}" "${MONGO_VOLUME_2}" "${MONGO_VOLUME_3}" "${MONGO_VOLUME_4}" "${MONGO_VOLUME_5}"
+  run_cmd rm -rfv "${MONGO_VOLUME_1}" "${MONGO_VOLUME_2}" "${MONGO_VOLUME_3}" "${MONGO_VOLUME_4}" "${MONGO_VOLUME_5}"
   echo -e "${GREEN}✅ Cleanup complete.${NC}"
 fi

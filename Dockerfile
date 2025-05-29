@@ -22,7 +22,7 @@ RUN npm --prefix frontend install
 COPY . .
 
 # Set a MongoDB server
-ENV MONGO_URL=mongodb://172.0.0.11:27017/?directConnection=true&replicaSet=myReplicaSet
+ENV MONGO_URL="mongodb://172.0.0.11:27017,172.0.0.12:27017,172.0.0.13:27017,172.0.0.14:27017,172.0.0.15:27017/?replicaSet=myReplicaSet"
 
 # Expose the port that your application runs on
 EXPOSE 3000

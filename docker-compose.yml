@@ -80,6 +80,21 @@ services:
         ipv4_address: 172.0.0.21
     restart: unless-stopped
 
+  front-end:
+    image: mongo-express
+    container_name: front-end
+    ports:
+      - ${FRONTEND_PORT}:${FRONTEND_PORT}
+    environment:
+      PORT: ${FRONTEND_PORT}
+      MONGO_URI: ${MONGO_URL}
+    depends_on:
+      - mongo1
+    networks:
+      mongoNet:
+        ipv4_address: 172.0.0.21
+    restart: unless-stopped
+
 volumes:
   mongo_1:
     driver: local

@@ -9,18 +9,17 @@ COPY package*.json ./
 
 # Install Node.js dependencies
 RUN npm install
+RUN npm --prefix backend install
+RUN npm --prefix frontend install
 
 # Copy the rest of your project files into the container
 COPY . .
 
-# Set a default port
-ENV PORT=3000
-
 # Set a MongoDB server
-ENV MONGO_URI=http://localhost
+ENV MONGO_URI=mongodb://localhost:27017/?directConnection=true&replicaSet=myReplicaSet
 
 # Expose the port that your application runs on
-EXPOSE $PORT
+EXPOSE 3000
 
 # Define the command to run your Node.js application
 CMD ["npm", "start"]

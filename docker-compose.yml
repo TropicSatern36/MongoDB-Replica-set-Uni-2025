@@ -84,9 +84,8 @@ services:
     image: ghcr.io/tropicsatern36/mongodb-replica-set-uni-2025:latest
     container_name: front-end
     ports:
-      - ${FRONTEND_PORT}:${FRONTEND_PORT}
+      - ${FRONTEND_PORT}:3000
     environment:
-      PORT: ${FRONTEND_PORT}
       MONGO_URI: ${MONGO_URL}
     depends_on:
       - mongo1

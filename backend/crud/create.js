@@ -6,6 +6,18 @@ const Wishlist = require('../models/wishlist');
 const Payment = require('../models/payment');
 
 
+async function createUser(userData) {
+  try {
+    console.log('Attempting to create user with data:', userData); // Log data received by create function
+    const user = new User(userData);
+    await user.save();
+    console.log('User saved successfully:', user); // Log saved user
+    return user;
+  } catch (error) {
+    console.error('Error in createUser:', error); // Log error in create function
+    throw error;
+  }
+} 
 //============================================
 //Creating a User
 async function createUser(userData) {

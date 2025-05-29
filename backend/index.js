@@ -85,6 +85,8 @@ app.get('/api/:model', async (req, res) => {
 
 app.post('/api/:model', async (req, res) => {
   try {
+    console.log(`Received POST request for model: ${req.params.model}`);
+    console.log('Request body:', req.body);
     const { model } = req.params;
     const data = req.body;
     let result;
@@ -108,10 +110,13 @@ app.post('/api/:model', async (req, res) => {
         result = await createPayment(data);
         break;
       default:
+        console.warn(`Model not found for POST request: ${model}`);
         return res.status(404).json({ error: 'Model not found' });
     }
+    console.log(`Successfully created data for model: ${model}`, result);
     res.json(result);
   } catch (error) {
+    console.error(`Error in POST /api/${req.params.model}:`, error);
     res.status(500).json({ error: error.message });
   }
 });

@@ -135,7 +135,7 @@ async function getAllReviews() {
   try {
     return await Review.find()
       .populate('user')
-      .populate('product'); // Assuming reviews are linked to products
+      .populate('product'); 
   } catch (error) {
     throw error;
   }

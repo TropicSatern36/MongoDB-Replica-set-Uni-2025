@@ -473,6 +473,14 @@ function SchemaDetail() {
                              return value.product.name || value.product.username || value.product.email || JSON.stringify(value.product);
                           }
 
+                          if (schemaName.toLowerCase() === 'payment') {
+                             if (column === 'user' && typeof value === 'object' && value !== null) {
+                                 return value.username || value._id; // Display username or fallback to ID
+                             }
+                             if (column === 'order' && typeof value === 'object' && value !== null) {
+                                 return `Order Total: ${value.totalAmount !== undefined ? value.totalAmount.toFixed(2) : value._id}`; // Display order total or fallback to ID
+                             }
+                          }
 
                           if (value instanceof Date && !isNaN(value.getTime())) {
                               return value.toLocaleDateString(); // Format date

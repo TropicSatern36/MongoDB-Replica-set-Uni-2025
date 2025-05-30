@@ -4,6 +4,7 @@ const Order = require('../models/order');
 const Review = require('../models/review');
 const Wishlist = require('../models/wishlist');
 const Payment = require('../models/payment');
+const Category = require('../models/Category');
 
 
 async function createUser(userData) {
@@ -97,6 +98,18 @@ async function createPayment(paymentData) {
   }
 }
 
+//============================================
+//Categories
+async function createCategory(categoryData) {
+  try {
+    const newCategory = new Category(categoryData);
+    console.log(newCategory);
+    return await newCategory.save();
+  } catch (error) {
+    throw error;
+  }
+}
+//============================================
 
 module.exports = {
   createUser,
@@ -104,6 +117,7 @@ module.exports = {
   createOrder,
   createReview,
   createWishlist,
-  createPayment
+  createPayment,
+  createCategory
 };
 
